@@ -1,6 +1,6 @@
 // src/components/NavbarOnly.js
 import React, { useState } from "react";
-import { Container, Nav, Navbar, Offcanvas, NavDropdown } from 'react-bootstrap';
+import { Container, Nav, Navbar, Offcanvas } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import "./index.css";
 import { FaSearch } from "react-icons/fa";

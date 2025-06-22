@@ -1,9 +1,8 @@
-import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { ImLocation2 } from "react-icons/im";
 import { FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-import { FaTwitter, FaFacebook, FaInstagram, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { FaTwitter, FaFacebook, FaInstagram  } from "react-icons/fa";
 import "./index.css"; 
 
 const Footer = () => {

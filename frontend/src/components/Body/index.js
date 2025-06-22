@@ -149,7 +149,7 @@ const BodyHome = () => {
         <div className="about-container">
           <div className="about-image">
             {/* the import of an image */}
-            <img src={`${saloncar}`} />
+            <img src={`${saloncar}`} alt="information"/>
           </div>
           <div className="about-text">
             <h5 className="section-subtitle">ABOUT US</h5>

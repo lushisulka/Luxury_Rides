@@ -1,4 +1,3 @@
-import { Container, Nav, Navbar, Offcanvas, NavDropdown } from 'react-bootstrap/';
 import BookForm from '../book-form';
 import "./index.css";
 import CustomNavbar from '../../components/Navbar';

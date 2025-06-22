@@ -1,31 +1,27 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Modal, Button, Form, Container, Row, Col } from 'react-bootstrap';
 import { useCarContext } from '../../../context/CarContext';
 
 const CreateVehicle = ({ open, close }) => {
-  const [values, setValues] = useState({ brand: '', model: '', color: '', engine: '', alimentation: '', year: 0, transmission: false, available: false, images: [], description: " ", type: " " });
-
-  const { createCar, cars } = useCarContext();
+  const [values, setValues] = useState({ brand: '', model: '', color: '', engine: 0, fuel: '', year: 0, transmission: false, available: false, description: "", type: "", images: [] });
+  const { createCar } = useCarContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const result = await createCar(values);
-      console.log('result', result);
     } catch (error) {
 
     }
   }
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value, type, checked, files } = event.target;
 
-    setValues((prevState) => {
-      return {
-        ...prevState,
-        [name]: name === 'transmission' || name === 'available' ? event.target.checked : value,
-      }
-    })
+    setValues((prevState) => ({
+      ...prevState,
+      [name]: type === "checkbox" ? checked : type === "file" ? Array.from(files) : value,
+    }));
   }
 
   return (
@@ -34,7 +30,7 @@ const CreateVehicle = ({ open, close }) => {
         <Modal.Title>Create Car</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} encType='multipart/form-data'>
           <Container>
             <Row>
               <Col md={6}>
@@ -61,16 +57,16 @@ const CreateVehicle = ({ open, close }) => {
               <Col md={6}>
                 <Form.Group className="mb-3" controlId="car-engine">
                   <Form.Label>Engine</Form.Label>
-                  <Form.Control value={values.engine} type="text" name='engine' onChange={handleChange} placeholder="Insert car engine" />
+                  <Form.Control value={values.engine} type="number" name='engine' onChange={handleChange} placeholder="Insert car engine" />
                 </Form.Group>
               </Col>
             </Row>
 
             <Row>
               <Col md={6}>
-                <Form.Group className="mb-3" controlId="car-alimentation">
-                  <Form.Label>Alimentation</Form.Label>
-                  <Form.Control value={values.alimentation} type="text" name='alimentation' onChange={handleChange} placeholder="Insert car alimentation" />
+                <Form.Group className="mb-3" controlId="fuel-type">
+                  <Form.Label>Fuel Type</Form.Label>
+                  <Form.Control value={values.alimentation} type="text" name='fuel' onChange={handleChange} placeholder="Insert car alimentation" />
                 </Form.Group>
               </Col>
               <Col md={6}>
@@ -86,20 +82,20 @@ const CreateVehicle = ({ open, close }) => {
                 <Form.Group className="mb-3" controlId="car-transmission">
                   <Form.Label>Transmission</Form.Label>
                   <div>
-                  <Form.Check
-                    inline
-                    type="switch"
-                    id="automatic"
-                    label={values.transmission ? "Automatic" : "Manual"}
-                    value={values.transmission}
-                    name="transmission"
-                    onChange={handleChange}
-                  />
-                    </div>
+                    <Form.Check
+                      inline
+                      type="switch"
+                      id="automatic"
+                      label={values.transmission ? "Automatic" : "Manual"}
+                      value={values.transmission}
+                      name="transmission"
+                      onChange={handleChange}
+                    />
+                  </div>
                 </Form.Group>
               </Col>
 
-  
+
               <Col md={6}>
                 <Form.Group className="mb-3" controlId="vehicle-available">
                   <Form.Label>Available</Form.Label>
@@ -117,7 +113,7 @@ const CreateVehicle = ({ open, close }) => {
                   </div>
                 </Form.Group>
               </Col>
-              </Row>
+            </Row>
 
             <Row>
               <Col md={6}>
@@ -136,7 +132,7 @@ const CreateVehicle = ({ open, close }) => {
 
             <Form.Group controlId="formFileMultiple" className="mb-3">
               <Form.Label>Photos</Form.Label>
-              <Form.Control type="file" multiple name='image' onChange={handleChange} />
+              <Form.Control type="file" multiple name='images' onChange={handleChange} />
             </Form.Group>
 
             <Modal.Footer>

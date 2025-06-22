@@ -1,4 +1,3 @@
-import Form from 'react-bootstrap/Form';
 import contactimage from '../../images/about.jpg'
 import './index.css';
 import CustomNavbar from "../../components/Navbar";

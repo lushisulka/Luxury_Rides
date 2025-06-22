@@ -16,7 +16,7 @@ export interface GetVehiclesResponse {
 export interface UpdateVehicleResponse {
   status: 200,
   message: string,
-  data: VehicleEntity
+  data: VehicleEntity | null
 }
 
 export interface DeleteVehiclesResponse {

@@ -9,9 +9,23 @@ import { DeleteVehiclesResponse } from './response/vehicle.response';
 export class VehiclesService {
     constructor(@InjectRepository(VehicleEntity) private readonly vehicleRepository: Repository<VehicleEntity>) { }
 
-    public async create(data: VehicleDto): Promise<VehicleEntity> {
+    public async create(data: VehicleDto, images: any): Promise<any> {
         try {
-            return await this.vehicleRepository.save(data);
+            const imageFilenames = images.images.map(image => image.filename);
+            const vehicle = {
+                brand: data.brand,
+                model: data.model,
+                color: data.color,
+                engine: data.engine,
+                fuel: data.fuel,
+                year: data.year,
+                transmission: data.transmission,
+                available: data.available,
+                description: data.description,
+                type: data.type,
+                images: imageFilenames
+            }
+            return await this.vehicleRepository.save(vehicle);
         } catch (e) {
             console.log(e);
             throw new HttpException('Error creating vehicle', HttpStatus.INTERNAL_SERVER_ERROR);
@@ -26,7 +40,7 @@ export class VehiclesService {
             throw new HttpException('Error creating vehicle', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    public async updateById(id: number, updateData: VehicleDto): Promise<VehicleEntity> {
+    public async updateById(id: number, updateData: VehicleDto): Promise<VehicleEntity | null> {
         try {
             const result = await this.vehicleRepository.findOne({ where: { id } });
             if (!result) {
@@ -34,10 +48,6 @@ export class VehiclesService {
             }
             await this.vehicleRepository.update(id, updateData);
             const updatedVehicle = await this.vehicleRepository.findOne({ where: { id } });
-            if (!updatedVehicle) {
-                // This is very unlikely, but safe to check
-                throw new HttpException('Failed to retrieve updated vehicle', HttpStatus.INTERNAL_SERVER_ERROR);
-            }
             return updatedVehicle;
         } catch (error) {
             throw new HttpException(error.message, error.status);

@@ -1,7 +1,10 @@
-import { Controller, Post, Get, Body, Put, HttpException, HttpStatus, ParseIntPipe, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Get, Body, Put, HttpException, HttpStatus, ParseIntPipe, Param, Delete, UseInterceptors, UploadedFiles, Res } from '@nestjs/common';
 import { VehiclesService } from './vehicles.service';
 import { VehicleDto } from './dto/vehicle.dto';
 import { VehicleResponse, GetVehiclesResponse, DeleteVehiclesResponse, UpdateVehicleResponse } from './response/vehicle.response';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { Response } from 'express';
 
 @Controller('vehicles')
 export class VehiclesController {
@@ -9,10 +12,22 @@ export class VehiclesController {
     constructor(private readonly vehiclesService: VehiclesService) { }
 
     @Post('create')
-    public async createVehicle(@Body() bodyParam: VehicleDto): Promise<VehicleResponse> {
+    @UseInterceptors(FileFieldsInterceptor(
+        [{ name: 'images', maxCount: 4 }],
+        {
+            storage: diskStorage({
+                destination: './uploads',  // Files will be saved in the 'uploads' folder
+                filename: (req, file, cb) => {
+                    const uniqueName = Date.now() + '-' + file.originalname;
+                    cb(null, uniqueName);
+                }
+            })
+        }
+    ))
+    public async createVehicle(@Body() bodyParam: VehicleDto, @UploadedFiles() files: Array<Express.Multer.File>[]): Promise<any> {
         try {
-            console.log("Creating vehicle with data: ", bodyParam);
-            const result = await this.vehiclesService.create(bodyParam);
+            //console.log("Creating vehicle with data: ", files);
+            const result = await this.vehiclesService.create(bodyParam, files);
             return {
                 status: 200,
                 message: "Vehicle created succesfully",
@@ -52,7 +67,6 @@ export class VehiclesController {
         }
     }
 
-
     @Put(':id')
     public async updateVehicle(@Param('id', ParseIntPipe) id: number, @Body() updateData: VehicleDto): Promise<UpdateVehicleResponse> {
         try {
@@ -74,5 +88,10 @@ export class VehiclesController {
         } catch (error) {
             throw new HttpException('Vehicle was not deleted', HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @Get('uploads/:path')
+    public getImage(@Param() path: any, @Res() res: Response) {
+        res.sendFile(path.path, { root: 'uploads' });
     }
 }

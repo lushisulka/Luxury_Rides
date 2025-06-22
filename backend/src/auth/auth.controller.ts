@@ -16,6 +16,9 @@ export class AuthController {
 
   @Post('register')
   public async register(@Body() bodyParam: RegisterDto, @Res({ passthrough: true }) response: Response): Promise<UserEntity> {
+
+
+
     try {
       const checkUser = await this.userService.findByEmail(bodyParam.email);
       if (checkUser) {

@@ -2,7 +2,6 @@ import { ImLocation2 } from "react-icons/im";
 import { GiShakingHands } from "react-icons/gi";
 import { IoCarSportSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
-import Contact from "../../pages/contact";
 import './index.css';
 
 

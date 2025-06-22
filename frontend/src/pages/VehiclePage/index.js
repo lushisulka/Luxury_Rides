@@ -5,12 +5,11 @@ import { useParams } from 'react-router-dom';
 import CustomNavbar from "../../components/Navbar";
 import Footer from '../../components/Footer';
 import Carousel from 'react-bootstrap/Carousel';
-import img1 from "../../images/car-1.jpg";
-import img2 from "../../images/car-3.jpg";
+
 import "./index.css";
 
 const VehiclePage = () => {
-const { getCarById } = useCarContext();
+  const { getCarById } = useCarContext();
   const { id } = useParams();
   const [car, setCar] = useState({});
 
@@ -19,7 +18,7 @@ const { getCarById } = useCarContext();
   }, [id]);
 
 
-  const loadCarById = async(id)=>{
+  const loadCarById = async (id) => {
     try {
       const result = await getCarById(id);
       if (result.status === 200) {
@@ -30,16 +29,12 @@ const { getCarById } = useCarContext();
     }
   }
 
-  console.log(car);
-
   return (
     <>
       <div className="vehicle-body">
-        <div className="vehicle-page-header">     {/*if you want that image to be included like a background and for navbar include it in css of the part you have navbar */}
+        <div className="vehicle-page-header">
           <CustomNavbar />
         </div>
-
-
 
         <div className="page-container">
           <Container>
@@ -52,9 +47,11 @@ const { getCarById } = useCarContext();
                     <li><span className="car-attribute">Brand</span> <span className="car-attr-response">{car.brand}</span></li>
                     <li><span className="car-attribute">Model</span> <span className="car-attr-response">{car.model}</span></li>
                     <li><span className="car-attribute">Year</span> <span className="car-attr-response">{car.year}</span></li>
-                    <li><span className="car-attribute">Type</span> <span className="car-attr-response">Sedan</span></li>
-                    <li><span className="car-attribute">Color</span> <span className="car-attr-response">Black</span></li>
-                    <li><span className="car-attribute">Description</span> <span className="car-attr-response">Luxury sports car</span></li>
+                    <li><span className="car-attribute">Type</span> <span className="car-attr-response">{car.type}</span></li>
+                    <li><span className="car-attribute">Transimision</span> <span className="car-attr-response">{car.transmission ? "Automatic" : "Manual"}</span></li>
+                    <li><span className="car-attribute">Available</span> <span className="car-attr-response">{car.available ? "Available" : "Not Available"}</span></li>
+                    <li><span className="car-attribute">Color</span> <span className="car-attr-response">{car.color}</span></li>
+                    <li><span className="car-attribute">Description</span> <span className="car-attr-response">{car.description}</span></li>
                   </ul>
                   <Button variant="warning" className="book-button">Book Now</Button>
                 </div>
@@ -65,36 +62,18 @@ const { getCarById } = useCarContext();
                 <div className="luxury-carousel">
                   <Carousel className="vehicle-carousel">
 
-                    <Carousel.Item>
-                      <Card className="vehicle-card">
-                        <Card.Img variant="top" src={img1} />
 
-                      </Card>
-                    </Carousel.Item>
-
-                    <Carousel.Item>
-                      <Card className="vehicle-card">
-                        <Card.Img variant="top" src={img1} />
-                      </Card>
-                    </Carousel.Item>
-
-                    <Carousel.Item>
-                      <Card className="vehicle-card">
-                        <Card.Img variant="top" src={img1} />
-                      </Card>
-                    </Carousel.Item>
-
-                    <Carousel.Item>
-                      <Card className="vehicle-card">
-                        <Card.Img variant="top" src={img1} />
-                      </Card>
-                    </Carousel.Item>
-
-                    <Carousel.Item>
-                      <Card className="vehicle-card">
-                        <Card.Img variant="top" src={img1} />
-                      </Card>
-                    </Carousel.Item>
+                    {
+                      car.images?.map((image, index) => {
+                        return (
+                          <Carousel.Item>
+                            <Card className="vehicle-card">
+                              <Card.Img variant="top" src={`http://localhost:3000/vehicles/uploads/${image}`} />
+                            </Card>
+                          </Carousel.Item>
+                        )
+                      })
+                    }
 
                   </Carousel>
                 </div>

@@ -1,13 +1,21 @@
 import { useState } from 'react';
 import { Navbar, Nav, Container, Button, Table } from 'react-bootstrap';
 import CreateVehicle from './createModal';
+import EditVehicle from './editModal';
 import { useCarContext } from '../../../context/CarContext';
 const AdminVehicles = () => {
 
   const { cars, deleteCar } = useCarContext();
   const [showModal, setShowModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [vehicleId, setVehicleId] = useState(0);
+
   const handleShow = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
+
+  const closeEditModal = () => {
+    setEditModal(!editModal);
+  }
 
   const handleDelete = async (id) => {
     //console.log('Delete car with ID:', typeof id);
@@ -18,6 +26,11 @@ const AdminVehicles = () => {
     } else {
       console.error('Failed to delete car');
     }
+  }
+
+  const handleEdit = (id) => {
+    setVehicleId(id);
+    setEditModal(!editModal);
   }
 
   return (
@@ -51,6 +64,9 @@ const AdminVehicles = () => {
             <th>Year</th>
             <th>Description</th>
             <th>Available</th>
+            <th>Transimision</th>
+            <th>Engine</th>
+            <th>Images</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -67,8 +83,17 @@ const AdminVehicles = () => {
                   <td>{el.year}</td>
                   <td>{el.description}</td>
                   <td>{el.available ? "Available" : "Not Available"}</td>
+                  <td>{el.transmission ? "Automatic" : "Manual"}</td>
+                  <td>{el.engine}</td>
                   <td>
-                    <Button variant="primary">Edit</Button>
+                    {
+                      el.images.map((image, index) => {
+                        return <img src={`http://localhost:3000/vehicles/uploads/${image}`} width={"80px"} style={{ marginRight: "20px" }} />
+                      })
+                    }
+                  </td>
+                  <td>
+                    <Button variant="primary" onClick={() => { handleEdit(el.id) }}>Edit</Button>
                   </td>
                   <td>
                     <Button variant="danger" onClick={() => { handleDelete(el.id) }}>Delete</Button>
@@ -79,12 +104,11 @@ const AdminVehicles = () => {
           } 
         </tbody>
       </Table>
+
       <CreateVehicle open={showModal} close={handleClose} />
-          <h2>
-            Admin Vehicles Management
-          </h2>
+      <EditVehicle sindi={editModal} close={closeEditModal} id={vehicleId} />
+
     </>
-  
   );
 }
 
