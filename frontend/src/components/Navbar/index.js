@@ -39,34 +39,7 @@ const CustomNavbar = () => {
               <Nav.Link as={Link} to="/our-vehicles" className={`text-white ${isActive("/our-vehicles") ? "active-link" : ""}`}>Our vehicles</Nav.Link>
               <Nav.Link as={Link} to="/locations" className={`text-white ${isActive("/locations") ? "active-link" : ""}`}>Locations</Nav.Link>
               <Nav.Link as={Link} to="/contact" className={`text-white ${isActive("/contact") ? "active-link" : ""}`}>Contact</Nav.Link>
-
-              {/* 🔸 Search Icon with toggle functionality */}
-              <Nav.Link
-                onClick={() => setShowSearch(!showSearch)}
-                className="text-white search-icon"
-                style={{ cursor: "pointer" }}
-              >
-                <FaSearch />
-              </Nav.Link>
-
-              <Nav.Link as={Link} to="/booking" className={`text-white ${isActive("/booking") ? "active-link" : ""}`}>
-                <GiCarKey />
-              </Nav.Link>
             </Nav>
-
-            {/* 🔸 Search Box appears here if toggled */}
-            {showSearch && (
-              <div className="search-box-container mt-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search vehicles..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  style={{ maxWidth: "200px" }}
-                />
-              </div>
-            )}
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>
