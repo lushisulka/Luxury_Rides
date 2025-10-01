@@ -2,9 +2,10 @@ import { Controller, Post, Get, Body, Put, HttpException, HttpStatus, ParseIntPi
 import { VehiclesService } from './vehicles.service';
 import { VehicleDto } from './dto/vehicle.dto';
 import { VehicleResponse, GetVehiclesResponse, DeleteVehiclesResponse, UpdateVehicleResponse } from './response/vehicle.response';
-import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { Response } from 'express';
+import { ImageNameHelper } from 'src/helpers/imageName.helper';
 
 @Controller('vehicles')
 export class VehiclesController {
@@ -12,21 +13,17 @@ export class VehiclesController {
     constructor(private readonly vehiclesService: VehiclesService) { }
 
     @Post('create')
-    @UseInterceptors(FileFieldsInterceptor(
-        [{ name: 'images', maxCount: 4 }],
-        {
-            storage: diskStorage({
-                destination: './uploads',  // Files will be saved in the 'uploads' folder
-                filename: (req, file, cb) => {
-                    const uniqueName = Date.now() + '-' + file.originalname;
-                    cb(null, uniqueName);
-                }
-            })
-        }
-    ))
-    public async createVehicle(@Body() bodyParam: VehicleDto, @UploadedFiles() files: Array<Express.Multer.File>[]): Promise<any> {
+    @UseInterceptors(FilesInterceptor('images', 10, {
+        storage: diskStorage({
+            destination: './uploads',
+            filename: (req, file, cb) => {
+                const imageName = new ImageNameHelper(file.originalname).getImageName();
+                cb(null, imageName);
+            }
+        }),
+    }))
+    public async createVehicle(@Body() bodyParam: VehicleDto, @UploadedFiles() files: Express.Multer.File[]): Promise<any> {
         try {
-            //console.log("Creating vehicle with data: ", files);
             const result = await this.vehiclesService.create(bodyParam, files);
             return {
                 status: 200,
@@ -43,6 +40,20 @@ export class VehiclesController {
     public async getVehicles(): Promise<GetVehiclesResponse> {
         try {
             const result = await this.vehiclesService.getAll();
+            return {
+                status: 200,
+                message: "Vehicle exists succesfully",
+                data: result
+            }
+        } catch (error) {
+            throw new HttpException('Error creating vehicle', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Get('featured')
+    public async featured(): Promise<GetVehiclesResponse> {
+        try {
+            const result = await this.vehiclesService.getAllFeatured();
             return {
                 status: 200,
                 message: "Vehicle exists succesfully",

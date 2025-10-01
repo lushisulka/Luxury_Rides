@@ -5,7 +5,7 @@ import { useCarContext } from "../../../context/CarContext";
 const EditVehicle = (props) => {
   const { editCar } = useCarContext();
   const [available, setAvailable] = useState(false);
-  const [values, setValues] = useState({ brand: '', model: '', color: '', engine: '', fuel: '', year: 0, transmission: false, available: false, images: [], description: " ", type: " " });
+  const [values, setValues] = useState({ brand: '', model: '', color: '', engine: '', fuel: '', year: 0, transmission: false, available: false, images: [], price: 0 });
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -24,8 +24,7 @@ const EditVehicle = (props) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const result = await editCar(props.id, values);
-      console.log("result----", result);
+      await editCar(props.id, values);
       props.close();
     } catch (error) {
     }
@@ -82,22 +81,6 @@ const EditVehicle = (props) => {
                 </Form.Group>
               </Col>
             </Row>
-
-            <Row>
-              <Col md={6}>
-                <Form.Group className="mb-3" controlId="car-type">
-                  <Form.Label>car type</Form.Label>
-                  <Form.Control name="type" type="text" onChange={(e) => { handleChange(e) }} value={values.type} />
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group className="mb-3" controlId="car-description">
-                  <Form.Label>car description</Form.Label>
-                  <Form.Control name="description" type="text" onChange={(e) => { handleChange(e) }} value={values.description} />
-                </Form.Group>
-              </Col>
-            </Row>
-
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-3" controlId="car-transmission">
@@ -136,6 +119,18 @@ const EditVehicle = (props) => {
               <Form.Label>Photos</Form.Label>
               <Form.Control type="file" multiple name='image' onChange={(e) => { handleChange(e) }} value={values.images} />
             </Form.Group>
+            <Form.Group className="mb-3" controlId="vehicle-price">
+              <Form.Label>Price per Day (€)</Form.Label>
+              <Form.Control
+                name="price"
+                type="number"
+                step="0.01"
+                placeholder="Enter car price"
+                value={values.price}
+                onChange={(e) => { handleChange(e) }}
+              />
+            </Form.Group>
+
 
             {/* Add more fields if needed */}
             <Modal.Footer>

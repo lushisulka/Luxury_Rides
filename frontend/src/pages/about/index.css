@@ -1,4 +1,5 @@
 .about-background {
+    position: relative;
     background-image: url('../../images/about-img.jpg');
     background-size: cover;
     background-position: center;
@@ -6,6 +7,10 @@
     width: 100%;
     height: 600px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .about-background::before {
@@ -14,11 +19,13 @@
     inset: 0;
     background-color: rgba(0, 0, 0, 0.3);
     height: 600px;
+    z-index: 0;
 }
 
 .about-title {
-    margin-top: 20%;
-    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin: 0;
 }
 
 .about-title h1 {
@@ -166,4 +173,79 @@
 
 .review-card-footer {
     text-align: center;
+}
+
+/* Për celularë */
+@media (max-width: 576px) {
+    .about-background {
+        height: 400px;
+    }
+
+    .about-title h1 {
+        font-size: 20px;
+    }
+
+    .about-title p {
+        font-size: 14px;
+        padding: 0 10px;
+    }
+
+    .about-content p {
+        font-size: 28px;
+    }
+
+    .about-body {
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .about-card-title {
+        font-size: 25px !important;
+    }
+
+    .about-card-text {
+        font-size: 16px;
+    }
+
+    .services-card-text,
+    .review-card-text {
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    .review-card-footer {
+        font-size: 12px;
+    }
+}
+
+/* Për tableta */
+@media (min-width: 577px) and (max-width: 992px) {
+    .about-background {
+        height: 500px;
+    }
+
+    .about-title h1 {
+        font-size: 25px;
+    }
+
+    .about-title p {
+        font-size: 16px;
+    }
+
+    .about-content p {
+        font-size: 35px;
+    }
+
+    .about-card-title {
+        font-size: 30px !important;
+    }
+
+    .about-card-text {
+        font-size: 18px;
+    }
+
+    .services-card-text,
+    .review-card-text {
+        font-size: 16px;
+    }
 }

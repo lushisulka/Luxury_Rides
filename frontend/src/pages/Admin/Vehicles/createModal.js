@@ -3,13 +3,15 @@ import { Modal, Button, Form, Container, Row, Col } from 'react-bootstrap';
 import { useCarContext } from '../../../context/CarContext';
 
 const CreateVehicle = ({ open, close }) => {
-  const [values, setValues] = useState({ brand: '', model: '', color: '', engine: 0, fuel: '', year: 0, transmission: false, available: false, description: "", type: "", images: [] });
+  const [values, setValues] = useState({ brand: '', model: '', color: '', engine: 0, fuel: '', year: 0, transmission: false, available: false, images: [], price: 0 });
   const { createCar } = useCarContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const result = await createCar(values);
+      close();
+      return result
     } catch (error) {
 
     }
@@ -66,13 +68,13 @@ const CreateVehicle = ({ open, close }) => {
               <Col md={6}>
                 <Form.Group className="mb-3" controlId="fuel-type">
                   <Form.Label>Fuel Type</Form.Label>
-                  <Form.Control value={values.alimentation} type="text" name='fuel' onChange={handleChange} placeholder="Insert car alimentation" />
+                  <Form.Control value={values.fuel} type="text" name='fuel' onChange={handleChange} placeholder="Insert car fuel" />
                 </Form.Group>
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-3" controlId="car-year">
                   <Form.Label>Car Year</Form.Label>
-                  <Form.Control values={values.year} type="number" name='year' onChange={handleChange} placeholder="Insert car year" />
+                  <Form.Control value={values.year} type="number" name='year' onChange={handleChange} placeholder="Insert car year" />
                 </Form.Group>
               </Col>
             </Row>
@@ -99,7 +101,6 @@ const CreateVehicle = ({ open, close }) => {
               <Col md={6}>
                 <Form.Group className="mb-3" controlId="vehicle-available">
                   <Form.Label>Available</Form.Label>
-
                   <div>
                     <Form.Check
                       type="switch"
@@ -115,26 +116,23 @@ const CreateVehicle = ({ open, close }) => {
               </Col>
             </Row>
 
-            <Row>
-              <Col md={6}>
-                <Form.Group className="mb-3" controlId="car-type">
-                  <Form.Label>Type</Form.Label>
-                  <Form.Control value={values.type} type="text" name='type' onChange={handleChange} placeholder="Insert type" />
-                </Form.Group>
-              </Col>
-              <Col md={6}>
-                <Form.Group className="mb-3" controlId="car-description">
-                  <Form.Label>Car Description</Form.Label>
-                  <Form.Control values={values.description} type="text" name='description' onChange={handleChange} placeholder="Insert description" />
-                </Form.Group>
-              </Col>
-            </Row>
-
             <Form.Group controlId="formFileMultiple" className="mb-3">
               <Form.Label>Photos</Form.Label>
               <Form.Control type="file" multiple name='images' onChange={handleChange} />
             </Form.Group>
 
+            <Form.Group className="mb-3">
+              <Form.Label>Price per Day (€)</Form.Label>
+              <Form.Control
+                type="number"
+                step="0.01"
+                placeholder="Enter car price"
+                name="price"
+                value={values.price}
+                onChange={(e) => setValues(prev => ({ ...prev, price: parseFloat(e.target.value) }))}
+              />
+
+            </Form.Group>
             <Modal.Footer>
               <Button variant="secondary" onClick={close}>
                 Close

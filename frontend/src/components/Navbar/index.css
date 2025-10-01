@@ -31,18 +31,24 @@
 .navbar-menu .dropdown-toggle {
   color: #ffffff !important;
   text-decoration: none;
-
 }
 
 /* Hover effect */
 .navbar-menu .nav-link:hover,
 .navbar-menu .dropdown-toggle:hover {
-  color: rgb(255, 122, 14) !important;
   transition: color 0.3s;
 }
 
 .nav-custom-style>a {
   color: #ffffff !important;
+}
+
+.auth-user {
+  width: 50px;
+  height: 50px;
+  background-color: #ff7a0e !important;
+  border-radius: 50%;
+  text-align: center;
 }
 
 /* Dropdown styling */

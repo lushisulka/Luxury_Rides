@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { BookingEntity } from 'src/booking/entity/booking.entity';
 
 @Entity('vehicles')
 export class VehicleEntity {
@@ -24,17 +25,17 @@ export class VehicleEntity {
   year: number;
 
   @Column()
-  transmission: boolean
+  transmission: boolean;
 
   @Column()
   available: boolean;
 
-  @Column()
-  description: string;
-
-  @Column()
-  type: string;
-
   @Column('json')
-  images: string[]
+  images: string[];
+
+  @OneToMany(() => BookingEntity, booking => booking.vehicle, { cascade: true })
+  booking: BookingEntity[];
+
+  @Column()
+  price: number;
 }

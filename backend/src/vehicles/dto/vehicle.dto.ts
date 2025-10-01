@@ -25,6 +25,11 @@ export class VehicleDto {
     year: number;
 
     @IsNotEmpty()
+    @IsNumber()
+    @Type(() => Number)
+    price: number;
+
+    @IsNotEmpty()
     @IsBoolean()
     @Transform(({ value }) => {
         if (typeof value === 'string') {
@@ -44,15 +49,4 @@ export class VehicleDto {
         return Boolean(value);
     })
     available: boolean;
-
-    @IsString()
-    @IsNotEmpty()
-    description: string;
-
-    @IsString()
-    @IsNotEmpty()
-    type: string;
-
-    // @IsArray()
-    // images: []
 }

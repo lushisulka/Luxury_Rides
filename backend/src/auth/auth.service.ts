@@ -13,10 +13,8 @@ export class AuthService {
       if (!jwt) {
         throw new ServiceHandler("You are anauthorized", HttpStatus.UNAUTHORIZED);
       }
-
       const decodedToken: any = this.jwtService.decode(jwt);
       const currentTime = Math.floor(Date.now() / 1000);
-
       if (decodedToken.exp < currentTime) {
         throw new HttpException("Token expired", HttpStatus.UNAUTHORIZED);
       }

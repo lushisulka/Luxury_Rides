@@ -4,6 +4,7 @@ import { VehicleEntity } from './entity/vehicle.entity';
 import { Repository } from 'typeorm';
 import { VehicleDto } from './dto/vehicle.dto';
 import { DeleteVehiclesResponse } from './response/vehicle.response';
+import * as fs from "fs";
 
 @Injectable()
 export class VehiclesService {
@@ -11,7 +12,7 @@ export class VehiclesService {
 
     public async create(data: VehicleDto, images: any): Promise<any> {
         try {
-            const imageFilenames = images.images.map(image => image.filename);
+            const imageFilenames = images.map(image => image.filename);
             const vehicle = {
                 brand: data.brand,
                 model: data.model,
@@ -21,10 +22,10 @@ export class VehiclesService {
                 year: data.year,
                 transmission: data.transmission,
                 available: data.available,
-                description: data.description,
-                type: data.type,
-                images: imageFilenames
+                images: imageFilenames,
+                price: data.price
             }
+
             return await this.vehicleRepository.save(vehicle);
         } catch (e) {
             console.log(e);
@@ -40,6 +41,16 @@ export class VehiclesService {
             throw new HttpException('Error creating vehicle', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    public async getAllFeatured(): Promise<VehicleEntity[]> {
+        try {
+            return await this.vehicleRepository.find({ take: 3 });
+        } catch (e) {
+            console.log(e);
+            throw new HttpException('Error creating vehicle', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     public async updateById(id: number, updateData: VehicleDto): Promise<VehicleEntity | null> {
         try {
             const result = await this.vehicleRepository.findOne({ where: { id } });
@@ -73,6 +84,18 @@ export class VehiclesService {
             if (!result) {
                 throw new HttpException('This vehicle was not found', HttpStatus.NOT_FOUND);
             }
+
+            if (Array.isArray(result.images)) {
+                result.images.forEach((image) => {
+                    const filePath = `uploads/${image}`;
+                    if (fs.existsSync(filePath)) {
+                        fs.unlinkSync(filePath);
+                    } else {
+                        console.log(`Not found: ${filePath}`);
+                    }
+                });
+            }
+
             await this.vehicleRepository.delete(id);
             return {
                 status: 200,

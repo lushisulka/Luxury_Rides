@@ -1,15 +1,21 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { get_cars_service, create_cars_service, delete_car_service, get_car_by_id_service, edit_car_service } from "../Services/carServices";
+import { get_cars_service, get_featured_cars_service, create_cars_service, delete_car_service, get_car_by_id_service, edit_car_service } from "../Services/carServices";
 
 const CarContext = createContext({});
 const CarProvider = (props) => {
   const [cars, setCars] = useState([]);
+  const [triggerCar, setTriggerCar] = useState(false);
+  const [bookedCars, setBookedCars] = useState([]);
+  const [featuredCars, setFeaturedCars] = useState([]);
 
   useEffect(() => {
-    getAllCart();
-  }, []);
+    getAllBookedCars();
+    getAllCars();
+    getAllFeaturedCar();
+    console.log("car--useEffect--")
+  }, [triggerCar]);
 
-  const getAllCart = async () => {
+  const getAllCars = async () => {
     try {
       const result = await get_cars_service();
       if (result.status === 200) {
@@ -20,11 +26,37 @@ const CarProvider = (props) => {
     }
   }
 
+  const getAllBookedCars = async () => {
+    try {
+      const result = await get_cars_service();
+      if (result.status === 200) {
+        const availableCars = result.data.filter((car, index) => {
+          return car.available === true;
+        });
+        setBookedCars(availableCars);
+      }
+    } catch (error) {
+      console.error('Error fetching cars:', error);
+    }
+  }
+
+  const getAllFeaturedCar = async () => {
+    try {
+      const result = await get_featured_cars_service();
+      if (result.status === 200) {
+        setFeaturedCars(result.data);
+      }
+    } catch (error) {
+      console.error('Error fetching cars:', error);
+    }
+  }
+
   const createCar = async (vehicles) => {
     try {
       const result = await create_cars_service(vehicles);
       if (result.status === 200) {
-        getAllCart();
+        getAllCars();
+        setTriggerCar(!triggerCar);
       }
     } catch (error) {
       console.error('Error creating car:', error);
@@ -37,7 +69,7 @@ const CarProvider = (props) => {
       const result = await delete_car_service(id);
       //console.log('Delete car with ID:', result);
       if (result.status === 200) {
-        getAllCart();
+        getAllCars();
         return result;
       }
     } catch (error) {
@@ -62,9 +94,8 @@ const CarProvider = (props) => {
   const editCar = async (id, updatedCar) => {
     try {
       const result = await edit_car_service(id, updatedCar);
-      console.log("resutl----", result);
       if (result.status === 200) {
-        getAllCart();
+        getAllBookedCars();
       }
     } catch (error) {
       console.error('Error editing car:', error);
@@ -73,7 +104,7 @@ const CarProvider = (props) => {
 
   }
 
-  const values = { cars, setCars, createCar, deleteCar, getCarById, editCar };
+  const values = { cars, setCars, featuredCars, bookedCars, createCar, deleteCar, getCarById, editCar, triggerCar, setTriggerCar };
 
   return (
     <CarContext.Provider value={values}>
@@ -83,10 +114,3 @@ const CarProvider = (props) => {
 
 const useCarContext = () => { return useContext(CarContext) };
 export { CarProvider, useCarContext };
-
-
-
-
-<h2>
-  hello from CarContext
-</h2>

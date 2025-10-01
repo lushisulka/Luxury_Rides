@@ -1,4 +1,5 @@
 import { Body, Controller, Get, HttpStatus, Post, Req, Res } from '@nestjs/common';
+import { AuthService } from "./auth.service";
 import { UsersService } from 'src/users/users.service';
 import { RegisterDto } from 'src/users/dto/user.dto';
 import { ServiceHandler } from 'src/errorHandler/service.error';
@@ -8,16 +9,16 @@ import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
 import { LoginDto } from 'src/users/dto/login.entity';
 
+
 @Controller('auth')
 export class AuthController {
-  authService: any;
-
-  constructor(private readonly userService: UsersService, private readonly jwtService: JwtService) { }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly userService: UsersService,
+    private readonly jwtService: JwtService) { }
 
   @Post('register')
   public async register(@Body() bodyParam: RegisterDto, @Res({ passthrough: true }) response: Response): Promise<UserEntity> {
-
-
 
     try {
       const checkUser = await this.userService.findByEmail(bodyParam.email);
@@ -28,7 +29,6 @@ export class AuthController {
         const user = {
           firstname: bodyParam.firstname,
           lastname: bodyParam.lastname,
-          phone: bodyParam.phone,
           email: bodyParam.email,
           password: hashedPassword,
           roles: "user",
@@ -53,7 +53,6 @@ export class AuthController {
         throw new ServiceHandler("user with this email was not found", HttpStatus.NOT_FOUND)
       }
       const password = await bcrypt.compare(bodyParam.password, user?.password);
-      console.log("password---", password)
       if (!password) {
         throw new ServiceHandler("your password is incorrect", HttpStatus.NOT_FOUND)
       }

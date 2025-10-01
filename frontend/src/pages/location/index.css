@@ -19,28 +19,30 @@
 .location-title {
     margin-top: 250px;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
+
 .location-title h1 {
-    font-size: 30px;
+    font-size: 2.8rem;
     font-family: "AboveTheBeyond", sans-serif;
     color: rgb(255, 122, 14);
     opacity: 0;
     transform: translateY(30px);
     animation: LocationAnimation 0.8s ease forwards;
 }
+
 .location-title p {
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
     color: rgb(252, 247, 245) !important;
     text-align: center;
     position: relative;
-    /* from here with this synta */
     opacity: 0;
     transform: translateY(30px);
-    animation: LocationAnimation 0.8s ease forwards;
+    animation: LocationAnimation 0.8s ease forwards 0.2s;
 }
 
-/* this makes the text to move  */
 @keyframes LocationAnimation {
     to {
         opacity: 1;
@@ -48,12 +50,26 @@
     }
 }
 
-.location-content p {
+/* Content below the header */
+.location-content {
+    background-color: #fff;
+    color: #333;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.location-content>p {
     font-size: 50px;
     font-weight: 700;
     font-family: 'Times New Roman', Times, serif;
     color: rgb(255, 122, 14);
     text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Map Section with Location Pin */
+.map-container {
+    margin-bottom: 80px;
 }
 
 .map-photo {
@@ -65,32 +81,170 @@
     background-position: center;
     background-repeat: no-repeat;
     margin-top: 40px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
 }
 
-
-/* Content below the header */
-.location-content {
-    background-color: #fff;
-    color: #333;
-    padding: 50px 20px;
-    text-align: center;
+.map-photo:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px rgba(255, 122, 14, 0.3);
 }
 
-.location-description {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* center horizontally */
-    justify-content: center;
-    text-align: center;
-    z-index: 2;
-    padding: 20px;
+.location-pin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
 }
 
-.location-description p {
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
+.pin-icon {
+    font-size: 40px;
+    color: rgb(255, 122, 14);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: bounce 2s infinite;
+    position: relative;
+    z-index: 4;
+}
+
+.pin-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 122, 14, 0.3);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translate(-50%, -50%);
+    }
+
+    40% {
+        transform: translate(-50%, -60%);
+    }
+
+    60% {
+        transform: translate(-50%, -55%);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(4);
+        opacity: 0;
+    }
+}
+
+.map-click-instruction {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    max-width: 600px;
-    margin-bottom: 20px;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    border: 2px solid rgb(255, 122, 14);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
+
+.map-photo:hover .map-click-instruction {
+    opacity: 1;
+}
+
+.map-photo.map-clicked .map-click-instruction {
+    opacity: 0;
+}
+
+
+/* Call to Action Section */
+.cta-section {
+    background: linear-gradient(135deg, #333 0%, #000 100%);
+    color: white;
+    padding: 60px 20px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.cta-section h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.cta-section p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: white !important;
+}
+
+.cta-button {
+    background: rgb(255, 122, 14);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(255, 122, 14, 0.3);
+}
+
+.cta-button:hover {
+    background: rgba(255, 122, 14, 0.9);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 122, 14, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .location-title h1 {
+        font-size: 24px;
+    }
+
+    .location-title p {
+        font-size: 16px;
+    }
+
+    .location-content>p {
+        font-size: 35px;
+    }
+
+    .map-photo {
+        width: 95%;
+        height: 300px;
+    }
+
+    .pin-icon {
+        font-size: 30px;
+    }
+}
+
+    .cta-section h2 {
+        font-size: 28px;
+    }
