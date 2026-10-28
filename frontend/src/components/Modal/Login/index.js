@@ -26,18 +26,25 @@ const Login = ({ show, close }) => {
 
     return (
         <>
-            <Modal show={show} onHide={close}>
+            <Modal
+                show={show}
+                onHide={close}
+                centered
+                keyboard={false}
+                className="login-modal">
+
                 <Modal.Header closeButton>
-                    <Modal.Title>Login</Modal.Title>
+                    <Modal.Title>Log In</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleLogin}>
                         <Form.Group className="mb-3" controlId="email">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control
+                                className="login-input"
                                 type="email"
                                 placeholder="name@example.com"
-                                name='email'
+                                name="email"
                                 value={auth.email}
                                 onChange={handleChange}
                                 autoFocus
@@ -46,17 +53,17 @@ const Login = ({ show, close }) => {
                         <Form.Group className="mb-3" controlId="password">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
+                                className="login-input"
                                 type="password"
-                                placeholder="password"
-                                name='password'
+                                placeholder="Password"
+                                name="password"
                                 value={auth.password}
                                 onChange={handleChange}
-                                autoFocus
                             />
                         </Form.Group>
                         <Modal.Footer>
-                            <Button variant="primary" type='submit'>
-                                Login
+                            <Button className="login-button" type="submit">
+                                Log In
                             </Button>
                         </Modal.Footer>
                     </Form>

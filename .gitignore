@@ -1,8 +1,19 @@
+
+# Dependencies
 backend/node_modules/
-backend/dist
-backend/test
-.gitignore
-backend/.env
 frontend/node_modules/
 
-.gitignore
+# Backend build and tests
+backend/dist/
+backend/test/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+backend/.env
+backend/uploads/
+frontend/.env
+
+# Docker
+

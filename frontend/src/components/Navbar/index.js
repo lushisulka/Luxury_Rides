@@ -8,15 +8,12 @@ import { useAuthContext } from "../../context/AuthContext";
 import "./index.css";
 
 const CustomNavbar = () => {
-  const { authUser, logout } = useAuthContext();
+  const { authUser, logout, showLogin, setShowLogin } = useAuthContext();
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
-  const [show, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
-  const handleCloseLogin = () => setShowLogin(false);
-  const handleShowLogin = () => setShowLogin(true);
 
   const handleCloseRegister = () => setShowRegister(false);
   const handleShowRegister = () => setShowRegister(true);
@@ -74,7 +71,12 @@ const CustomNavbar = () => {
                 </>
               ) : (
                 <>
-                  <Nav.Link className={`text-white ${isActive("/login") ? "active-link" : ""}`} onClick={handleShowLogin}>Login</Nav.Link>
+                    <Nav.Link
+                      className={`text-white ${isActive("/login") ? "active-link" : ""}`}
+                      onClick={() => setShowLogin(true)}
+                    >
+                      Login
+                    </Nav.Link>
                   <Nav.Link className={`text-white ${isActive("/register") ? "active-link" : ""}`} onClick={handleShowRegister}>Register</Nav.Link>
                 </>
               )}
@@ -83,7 +85,7 @@ const CustomNavbar = () => {
         </Navbar.Offcanvas>
       </Container>
 
-      <Login show={show} close={handleCloseLogin} />
+      <Login show={showLogin} close={() => setShowLogin(false)} />
       <Register show={showRegister} close={handleCloseRegister} />
     </Navbar>
   );

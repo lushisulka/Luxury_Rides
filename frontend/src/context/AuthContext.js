@@ -6,6 +6,7 @@ const AuthProvider = (props) => {
     const [authUser, setAuthUser] = useState([]);
     const [trigger, setTrigger] = useState([]);
     const [isAuthChecked, setIsAuthChecked] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
 
     useEffect(() => {
         checkAuthUser();
@@ -66,7 +67,15 @@ const AuthProvider = (props) => {
     }
 
 
-    const values = { login, register, logout, authUser, isAuthChecked };
+    const values = {
+        login,
+        register,
+        logout,
+        authUser,
+        isAuthChecked,
+        showLogin,
+        setShowLogin
+    };
 
     return (
         <AuthContext.Provider value={values}>
