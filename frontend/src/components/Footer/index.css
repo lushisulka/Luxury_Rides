@@ -1,28 +1,30 @@
 .footer-section {
   background-color: #000000;
   color: #0c0505;
-  padding: 40px 0;
-  margin-top:7%;
+  padding: 25px 0 15px;
+  margin-top: 3%;
 }
 
 .footer-card {
-  border: 0px !important;
+  border: 0 !important;
 }
 
 .custom-card-body {
   background-color: #000000;
+  padding: 15px;
 }
 
-.card-title > h4 {
+.card-title>h4 {
   text-align: center;
-  margin-bottom: 40px;
-  font-size: 25px;
+  margin-bottom: 20px;
+  font-size: 22px;
 }
-.card-title > h3{
-  text-align:center;
+
+.card-title>h3 {
+  text-align: center;
   color: rgb(255, 122, 14);
-  font-size: 25px;
-  margin-bottom: 40px;
+  font-size: 21px;
+  margin-bottom: 20px;
 }
 
 .card-title>h4>a {
@@ -32,31 +34,35 @@
 
 .desc {
   text-align: center;
-  color: #ffffff ;
-  font-size: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
-.desc  p{
-  font-size: 15px;
-  margin-bottom: 20px;
+
+.desc p {
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .social-icons {
-  font-size: 25px;
+  font-size: 22px;
   text-align: center;
 }
 
-.social-icons > svg{
-  margin-right: 15px;
+.social-icons>svg {
+  margin-right: 12px;
   color: rgb(255, 122, 14);
 }
-.copyright-text{
+
+.copyright-text {
   color: rgb(255, 122, 14);
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
+  margin-top: 10px;
 }
-/* this is for editing all the paragraps inside cards */
-.card-text p{
+
+.card-text p {
   color: #ffffff;
-  font-size: 15px;
+  font-size: 14px;
 }

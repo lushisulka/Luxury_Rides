@@ -1,49 +1,60 @@
+/* HERO */
 .about-background {
     position: relative;
-    background-image: url('../../images/about-img.jpg');
+    isolation: isolate;
+    background-image: url("../../images/about-img.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    height: 600px;
-    overflow: hidden;
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding: 80px 24px;
+    overflow: hidden;
 }
 
 .about-background::before {
     content: "";
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    height: 600px;
-    z-index: 0;
+    background: linear-gradient(90deg,
+            rgba(0, 0, 0, 0.65),
+            rgba(0, 0, 0, 0.35));
+    z-index: -1;
 }
 
 .about-title {
     position: relative;
-    z-index: 1;
-    margin: 0;
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
 }
 
 .about-title h1 {
-    font-size: 30px;
+    margin: 0;
+    color: #ff7a0e;
     font-family: "AboveTheBeyond", sans-serif;
-    color: rgb(255, 122, 14);
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.2;
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
     animation: AboutUsAnimation 0.8s ease forwards;
 }
 
 .about-title p {
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-    color: white;
+    max-width: 720px;
+    margin: 20px auto 0;
+    color: #fff;
+    font-family: "Times New Roman", Times, serif;
+    font-size: clamp(16px, 1.8vw, 20px);
+    line-height: 1.8;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
     opacity: 0;
-    transform: translateY(30px);
-    animation: AboutUsAnimation 0.8s ease forwards;
+    transform: translateY(20px);
+    animation: AboutUsAnimation 0.8s ease 0.15s forwards;
 }
 
 @keyframes AboutUsAnimation {
@@ -53,175 +64,322 @@
     }
 }
 
-.about-content p {
-    font-size: 50px;
+/* OUR STORY */
+.about-story {
+    padding: 70px 0;
+}
+
+.story-label,
+.experience-heading>span,
+.cta-content>div>span {
+    color: #ff7a0e;
+    font-size: 13px;
     font-weight: 700;
-    font-family: 'Times New Roman', Times, serif;
-    margin-top: 20px;
-    color: rgb(255, 122, 14);
+    letter-spacing: 2px;
+}
+
+.about-story h2 {
+    margin-top: 16px;
+    color: #333;
+    font-family: "AboveTheBeyond", sans-serif;
+    font-size: clamp(32px, 4vw, 46px);
+    line-height: 1.2;
+}
+
+.story-description {
+    max-width: 750px;
+    margin-bottom: 18px;
+    color: #555;
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.story-link,
+.story-link:visited {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #ff7a0e;
+    color: #171717;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+}
+
+.story-link:hover {
+    color: #ff7a0e;
+}
+
+/* EXPERIENCE */
+.about-experience {
+    padding: 70px 0 90px;
+}
+
+.experience-heading {
+    max-width: 680px;
+    margin: 0 auto 50px;
     text-align: center;
 }
 
-/*services section*/
-.services-card {
-    margin-top: 20px;
-    border-radius: 10px !important;
-    transition: transform 0.5s ease;
-    box-shadow: 0.3s ease;
-    cursor: pointer;
+.experience-heading h2 {
+    margin: 16px 0;
+    color: #333;
+    font-family: "AboveTheBeyond", sans-serif;
+    font-size: clamp(28px, 3.5vw, 40px);
+    line-height: 1.25;
 }
 
-.services-card:hover {
-    transform: translateX(-3px);
-    box-shadow: 0 12px 20px rgb(174, 172, 171);
-    color: rgb(0, 0, 0);
+.experience-heading p {
+    margin: 0;
+    color: #777;
+    font-size: 15px;
+    line-height: 1.8;
 }
 
-.services-card-body {
-    border-radius: 10px;
-    background-color: rgb(236, 227, 219);
+.experience-list {
+    row-gap: 30px;
 }
 
-.services-card-title {
-    text-align: center;
-    color: rgb(0, 0, 0);
-    font-size: 20px !important;
+.experience-item {
+    height: 100%;
+    padding: 25px 22px 10px;
+    border-top: 1px solid #d8d8d8;
 }
 
-.card:hover .services-card-title {
-    color: rgb(255, 122, 14);
+.experience-number {
+    display: inline-block;
+    margin-bottom: 22px;
+    color: #ff7a0e;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-.services-card-text {
-    line-height: 30px;
-    color: black;
-    font-size: 18px;
-    font-family: 'Times New Roman', Times, serif;
+.experience-item h3 {
+    margin-bottom: 14px;
+    color: #191919;
+    font-size: 20px;
+    font-weight: 600;
 }
 
+.experience-item p {
+    margin: 0;
+    color: #707070;
+    font-size: 15px;
+    line-height: 1.8;
+}
 
-
-/*about-section*/
+/* STATISTICS */
 .about-body {
-    background-color: black;
-    height: 200px;
-    margin-top: 7%;
-    margin-bottom: 5%;
+    margin: 30px 0;
+    padding: 50px 0;
+    background: #f7f7f7;
 }
 
-.about-card {
-    margin-top: 20px;
-    border-radius: 20px;
-    border: 0px !important;
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.about-card-body {
-    background-color: rgb(0, 0, 0);
-}
-
-/* edit of text inside black block */
-.about-card-title {
+.about-stat {
+    padding: 10px 20px;
     text-align: center;
-    color: rgb(225, 107, 39) !important;
-    font-size: 40px !important;
+    border-right: 1px solid #dedede;
 }
 
-.about-card-text {
-    text-align: center;
-    color: rgb(255, 255, 255);
-    font-size: 25px;
+.about-stat:last-child {
+    border-right: none;
 }
 
-/*review section*/
-
-.review-card {
-    margin-top: 20px;
-    border-radius: 10px !important;
-    transition: transform 0.5s ease;
-    box-shadow: 0.3s ease;
-    cursor: pointer;
+.about-stat h3 {
+    margin: 0 0 10px;
+    color: #171717;
+    font-size: clamp(27px, 3vw, 38px);
+    font-weight: 500;
 }
 
-.review-card:hover {
-    transform: translateX(-3px);
-    box-shadow: 0 12px 20px rgb(174, 172, 171);
-    color: rgb(0, 0, 0);
+.about-stat h3 span {
+    color: #ff7a0e;
 }
 
-.review-card-body {
-    border-radius: 10px;
-    background-color: rgb(236, 227, 219);
+.about-stat p {
+    margin: 0;
+    color: #777;
+    font-size: 13px;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
 }
 
-.review-card-title {
-    text-align: center;
-    color: rgb(0, 0, 0);
-    font-size: 20px !important;
+/* CTA */
+.cta-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
 }
 
-.card:hover .review-card-title {
-    color: rgb(255, 122, 14);
-}
-
-.review-card-text {
-    line-height: 30px;
-    color: black;
-    font-size: 18px;
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-}
-
-.review-card-footer {
-    text-align: center;
-}
-
-/* Për celularë */
-@media (max-width: 576px) {
+/* TABLET */
+@media (max-width: 768px) {
     .about-background {
-        height: 400px;
+        min-height: 500px;
+        padding: 70px 28px;
+        background-position: 58% center;
+    }
+
+    .about-title {
+        max-width: 600px;
     }
 
     .about-title h1 {
-        font-size: 20px;
+        font-size: clamp(29px, 5vw, 38px);
     }
 
     .about-title p {
-        font-size: 14px;
-        padding: 0 10px;
+        max-width: 520px;
+        margin-top: 16px;
+        font-size: 17px;
+        line-height: 1.7;
     }
 
-    .about-content p {
-        font-size: 28px;
+    .about-story,
+    .about-experience {
+        padding: 55px 0;
     }
 
-    .about-body {
-        height: auto;
-        padding: 20px 0;
+    .experience-heading {
+        margin-bottom: 35px;
     }
 
-    .about-card-title {
-        font-size: 25px !important;
+    .experience-item {
+        padding: 20px 12px 5px;
     }
 
-    .about-card-text {
-        font-size: 16px;
+    .about-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 28px;
     }
 
-    .services-card-text,
-    .review-card-text {
-        font-size: 14px;
-        line-height: 24px;
+    .about-stat:nth-child(2) {
+        border-right: none;
     }
 
-    .review-card-footer {
+    .about-stat h3 {
+        font-size: 30px;
+    }
+
+    .about-stat p {
         font-size: 12px;
+    }
+
+    .cta-content {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 30px 24px;
     }
 }
 
-/* Për tableta */
-@media (min-width: 577px) and (max-width: 992px) {
+/* MOBILE */
+@media (max-width: 576px) {
     .about-background {
-        height: 500px;
+        height: 100vh;
+        min-height: 100vh;
+        height: 100dvh;
+        padding: 70px 22px;
+        background-position: 60% center;
+        background-size: cover;
+    }
+
+
+    .about-background::before {
+        background: rgba(0, 0, 0, 0.55);
+    }
+
+    .about-title {
+        max-width: 400px;
+    }
+
+    .about-title h1 {
+        font-size: 29px;
+        line-height: 1.25;
+    }
+
+    .about-title p {
+        margin-top: 15px;
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .about-story,
+    .about-experience {
+        padding: 45px 0;
+    }
+
+    .about-story h2 {
+        font-size: 32px;
+    }
+
+    .story-description {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .experience-heading h2 {
+        font-size: 29px;
+    }
+
+    .experience-heading p,
+    .experience-item p {
+        font-size: 14px;
+    }
+
+    .experience-item {
+        padding: 18px 8px 5px;
+    }
+
+    .experience-item h3 {
+        font-size: 18px;
+    }
+
+    .about-body {
+        margin: 20px 0;
+        padding: 35px 0;
+    }
+
+    .about-stats {
+        row-gap: 24px;
+    }
+
+    .about-stat {
+        padding: 8px 10px;
+    }
+
+    .about-stat h3 {
+        font-size: 27px;
+    }
+
+    .about-stat p {
+        font-size: 11px;
+        letter-spacing: 0;
+    }
+
+    .cta-content {
+        padding: 25px 18px;
+    }
+
+    .cta-content h2 {
+        font-size: 26px;
+    }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 360px) {
+    .about-background {
+        min-height: 420px;
+        padding: 55px 16px;
     }
 
     .about-title h1 {
@@ -229,23 +387,10 @@
     }
 
     .about-title p {
-        font-size: 16px;
+        font-size: 14px;
     }
 
-    .about-content p {
-        font-size: 35px;
-    }
-
-    .about-card-title {
-        font-size: 30px !important;
-    }
-
-    .about-card-text {
-        font-size: 18px;
-    }
-
-    .services-card-text,
-    .review-card-text {
-        font-size: 16px;
+    .about-stat h3 {
+        font-size: 24px;
     }
 }

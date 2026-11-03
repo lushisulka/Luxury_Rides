@@ -52,7 +52,7 @@ const CustomNavbar = () => {
             <Nav className="navbar-menu nav-gap nav-custom-style">
               <Nav.Link as={Link} to="/" className={`text-white ${isActive("/") ? "active-link" : ""}`}>Home</Nav.Link>
               <Nav.Link as={Link} to="/about" className={`text-white ${isActive("/about") ? "active-link" : ""}`}>About</Nav.Link>
-              <Nav.Link as={Link} to="/our-vehicles" className={`text-white ${isActive("/our-vehicles") ? "active-link" : ""}`}>Our vehicles</Nav.Link>
+              <Nav.Link as={Link} to="/our-vehicles" className={`text-white ${isActive("/our-vehicles") ? "active-link" : ""}`}>Our Vehicles</Nav.Link>
               <Nav.Link as={Link} to="/locations" className={`text-white ${isActive("/locations") ? "active-link" : ""}`}>Locations</Nav.Link>
               <Nav.Link as={Link} to="/contact" className={`text-white ${isActive("/contact") ? "active-link" : ""}`}>Contact</Nav.Link>
 
@@ -71,12 +71,12 @@ const CustomNavbar = () => {
                 </>
               ) : (
                 <>
-                    <Nav.Link
-                      className={`text-white ${isActive("/login") ? "active-link" : ""}`}
-                      onClick={() => setShowLogin(true)}
-                    >
-                      Login
-                    </Nav.Link>
+                  <Nav.Link
+                    className={`text-white ${isActive("/login") ? "active-link" : ""}`}
+                    onClick={() => setShowLogin(true)}
+                  >
+                    Login
+                  </Nav.Link>
                   <Nav.Link className={`text-white ${isActive("/register") ? "active-link" : ""}`} onClick={handleShowRegister}>Register</Nav.Link>
                 </>
               )}

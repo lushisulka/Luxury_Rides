@@ -40,9 +40,9 @@ const Footer = () => {
                 </Card.Title>
                 <Card.Text className="desc">
                   <p>Monday - Friday:</p>
-                  <p>09.00 AM - 09.00 PM</p><br></br>
+                  <p>08.00 AM - 10.00 PM</p><br></br>
                   <p>Saturday - Sunday:</p>
-                  <p>09.00 AM - 12.00 PM</p>
+                  <p>24 Hours</p>
                   </Card.Text>
                 
               </Card.Body>
@@ -76,7 +76,7 @@ const Footer = () => {
                 </Card.Title>
                 <Card.Text className="desc">
                   <p><ImLocation2/> 45 Abdyl Frashëri St., Blloku, Tirana, Albania</p>
-                  <p><FaPhone/> + 2 392 3929 210</p>
+                  <p><FaPhone/> +355 67 754 8371</p>
                   <p><MdEmail/> luxuryrides@gmail.com</p>
                 </Card.Text>
               </Card.Body>
@@ -87,7 +87,9 @@ const Footer = () => {
         {/* Copyright */}
         <Row>
           <Col className="copyright-text">
-            <p>Copyright ©2025 All rights reserved  </p>
+            <p>
+              Copyright © 2022–{new Date().getFullYear()} Luxury Rides. All rights reserved.
+            </p>
           </Col>
         </Row>
       </Container>

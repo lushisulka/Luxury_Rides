@@ -1,5 +1,9 @@
-- docker compose up -d
-- docker compose stop
+docker compose up -d
+
+docker compose stop
+
+Frontend: http://localhost:3001
+Backend: http://localhost:3000
 
 
 # Docker — Komandat kryesore

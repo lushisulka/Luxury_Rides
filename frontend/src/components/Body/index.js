@@ -2,7 +2,7 @@ import { Container, Row, Col, Button, Card, Nav } from "react-bootstrap";
 import { useCarContext } from "../../context/CarContext";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
-import AboutPhoto from "../../images/about-body.png";
+import AboutPhoto from "../../images/vehicle-page-header-bg.jpg";
 import "./index.css";
 
 const BodyHome = () => {
@@ -16,7 +16,6 @@ const BodyHome = () => {
   return (
     <>
       <section className="body-page">
-        <div className="home-main-wrapper">
           <Container className="body-home">
             <div className="carousel-title text-center mb-5">
               <h2>Featured Vehicles</h2>
@@ -48,13 +47,20 @@ const BodyHome = () => {
                             {car.available ? "Available" : "Not Available"}
                           </Card.Text>
                         </div>
-                        <Button className="w-100 mt-3" onClick={() => {
-                          if (authUser?.id && car.available === true) {
-                            navigate(`/vehicle/${car.id}`);
-                          }
-                        }}
+                        <Button
+                          className="w-100 mt-3 vehicle-action-btn"
+                          disabled={authUser?.id && !car.available}
+                          onClick={() => {
+                            if (!authUser?.id || car.available === true) {
+                              navigate(`/vehicle/${car.id}`);
+                            }
+                          }}
                         >
-                          {(authUser?.id && car.available === true) ? "Book Now"  : "Not available"}
+                          {!authUser?.id
+                            ? "Explore Car"
+                            : car.available
+                              ? "Book Now"
+                              : "Not Available"}
                         </Button>
                       </Card.Body>
                     </Card>
@@ -63,10 +69,9 @@ const BodyHome = () => {
               )}
             </Row>
           </Container>
-        </div>
 
         {/* About Section */}
-        <section className="about-section my-5">
+        <section className="about-section">
           <div className="about-container">
             <div className="about-image">
               <img src={AboutPhoto} alt="Salon" />

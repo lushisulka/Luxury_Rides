@@ -16,7 +16,8 @@ const Contact = () => {
                 </div>
             </div>
             <div className="title-form">
-                <p>Have a Question? Contact Us!</p>
+                <span>GET IN TOUCH</span>
+                <h2>Let's start a conversation.</h2>
             </div>
 
 

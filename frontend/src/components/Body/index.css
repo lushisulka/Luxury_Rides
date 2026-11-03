@@ -1,10 +1,4 @@
 
-/* Main Background */
-.home-main-wrapper {
-  background: white;
-  min-height: 100vh;
-}
-
 
 /* Title */
 .carousel-title h2 {
@@ -15,8 +9,8 @@
 }
 
 .carousel-subtitle {
-  color: #000000;
-  font-size: 25px;
+  color: #333;
+  font-size: 30px;
   font-family: "AboveTheBeyond", sans-serif;
 }
 
@@ -83,12 +77,12 @@
 
 }
 
-/* Orange Buttons with Black Shadow */
+/* Orange Buttons */
 .vehicle-card .btn,
 .about-btn {
   background: #ff6b35;
   border: none;
-  border-radius: 25px;
+  border-radius: 10px;
   padding: 12px 25px;
   font-weight: 600;
   color: white;
@@ -104,10 +98,33 @@
   color: white;
 }
 
+/* Prevent blue color on click and focus */
+.vehicle-card .btn:focus,
+.vehicle-card .btn:active,
+.vehicle-card .btn:focus-visible,
+.about-btn:focus,
+.about-btn:active,
+.about-btn:focus-visible {
+  background: #ff6b35;
+  border-color: #ff6b35;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  outline: none;
+}
+
+/* Disabled button */
+.vehicle-card .btn:disabled {
+  background: #ff6b35;
+  border-color: #ff6b35;
+  color: white;
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* About Section */
 .about-section {
-  background: white;
-  padding: 80px 0;
+  padding: 80px 0 20px;
 }
 
 .about-container {
@@ -159,8 +176,32 @@
   margin-bottom: 20px;
 }
 
+.about-btn,
+.about-btn.btn-primary {
+  background-color: #ff6b35 !important;
+  border-color: #ff6b35 !important;
+  border-radius: 10px;
+  padding: 12px 25px;
+  font-weight: 600;
+  color: #fff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.about-btn:hover,
+.about-btn:focus,
+.about-btn:active,
+.about-btn.btn-primary:hover,
+.about-btn.btn-primary:focus,
+.about-btn.btn-primary:active {
+  background-color: #ff8c42 !important;
+  border-color: #ff8c42 !important;
+  color: #fff !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
 .about-btn .nav-link {
-  color: rgb(255, 255, 255) !important;
+  color: #fff !important;
   text-decoration: none;
 }
 
