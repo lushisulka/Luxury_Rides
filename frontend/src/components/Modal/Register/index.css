@@ -1,0 +1,200 @@
+
+/* Register Modal */
+
+.register-modal .modal-dialog {
+    width: calc(100% - 2rem);
+    max-width: 390px;
+    margin: 1rem auto;
+}
+
+.register-modal .modal-content {
+    border: none;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+/* Header */
+
+.register-modal .modal-header {
+    position: relative;
+    justify-content: center;
+    padding: 0.7rem 1.25rem;
+    border-bottom: 1px solid #f0e8e2;
+    background: #ffffff;
+}
+
+.register-modal .modal-title {
+    color: #000000;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.register-modal .modal-header .btn-close {
+    position: absolute;
+    right: 1rem;
+    margin: 0;
+    padding: 0.4rem;
+    opacity: 0.65;
+    transition: opacity 0.2s ease;
+}
+
+.register-modal .modal-header .btn-close:hover {
+    opacity: 1;
+}
+
+/* Modal Body */
+
+.register-modal .modal-body {
+    padding: 1.5rem;
+}
+
+.register-modal .form-label {
+    margin-bottom: 0.5rem;
+    color: #374151;
+    font-size: 0.92rem;
+    font-weight: 500;
+}
+
+/* Inputs */
+
+.register-modal .register-input {
+    min-height: 43px;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid #ebe8e5 !important;
+    border-radius: 9px;
+    background-color: #ffffff;
+    color: #1e293b;
+    font-size: 0.95rem;
+    outline: none !important;
+    box-shadow: none !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register-modal .register-input::placeholder {
+    color: #9ca3af;
+}
+
+.register-modal .register-input:hover {
+    border-color: #f97316 !important;
+}
+
+.register-modal .register-input:focus {
+    border-color: #f97316 !important;
+    background-color: #ffffff;
+    color: #1e293b;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15) !important;
+}
+
+/* Chrome Autofill */
+
+.register-modal .register-input:-webkit-autofill,
+.register-modal .register-input:-webkit-autofill:hover,
+.register-modal .register-input:-webkit-autofill:focus,
+.register-modal .register-input:-webkit-autofill:active {
+    -webkit-text-fill-color: #1e293b !important;
+    caret-color: #1e293b;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    border: 1px solid #f97316 !important;
+}
+
+/* Footer */
+
+.register-modal .modal-footer {
+    justify-content: center;
+    padding: 0.75rem 0 0;
+    border-top: none;
+}
+
+/* Register Button */
+
+.register-modal .register-button {
+    display: block;
+    width: auto;
+    min-width: 125px;
+    margin: 0 auto;
+    padding: 0.65rem 1.7rem;
+    border: 1px solid #f97316;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.18);
+    transition: background 0.2s ease, box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.register-modal .register-button:hover {
+    border-color: #c2410c;
+    background: linear-gradient(135deg, #ea580c, #c2410c);
+    color: #ffffff;
+    box-shadow: 0 7px 18px rgba(249, 115, 22, 0.25);
+    transform: translateY(-1px);
+}
+
+.register-modal .register-button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(249, 115, 22, 0.18);
+}
+
+.register-modal .register-button:focus-visible {
+    outline: 3px solid rgba(249, 115, 22, 0.3);
+    outline-offset: 3px;
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 576px) {
+    .register-modal .modal-dialog {
+        width: calc(100% - 2rem);
+        max-width: 390px;
+        margin: 0.75rem auto;
+    }
+
+    .register-modal .modal-content {
+        border-radius: 14px;
+    }
+
+    .register-modal .modal-header {
+        padding: 1rem 1.25rem;
+    }
+
+    .register-modal .modal-title {
+        font-size: 1.15rem;
+    }
+
+    .register-modal .modal-body {
+        padding: 1.25rem;
+    }
+
+    .register-modal .form-label {
+        font-size: 0.9rem;
+    }
+
+    .register-modal .register-input {
+        min-height: 44px;
+        font-size: 16px;
+    }
+
+    .register-modal .register-button {
+        width: 100%;
+        min-height: 44px;
+    }
+}
+
+/* Small Mobile */
+
+@media (max-width: 360px) {
+    .register-modal .modal-dialog {
+        width: calc(100% - 1.5rem);
+    }
+
+    .register-modal .modal-body {
+        padding: 1rem;
+    }
+}

@@ -126,25 +126,18 @@
 
   .mobile-menu-title {
     font-size: 26px;
-    /* Madhësia e tekstit për titullin në menu */
     font-weight: 700;
-    /* Trashësia e tekstit për ta bërë më të dukshëm */
     color: #ffffff;
-    /* Ngjyra e tekstit është e bardhë */
     text-align: center;
-    /* Qendron titullin horizontalisht në mes */
     width: 100%;
-    /* E zgjeron elementin në të gjithë gjerësinë e hapësirës */
     margin-top: 10px;
-    /* Shton pak hapësirë sipër titullit */
     text-transform: uppercase;
-    /* Shndërron të gjithë tekstin në shkronja të mëdha */
     letter-spacing: 2px;
-    /* Hapësirë mes shkronjave për më shumë efekt vizual */
   }
 
   .mobile-menu-title strong {
     color: rgb(255, 122, 14);
+    font-family: "AboveTheBeyond", cursive;
     /* Ngjyra e pjesës me <strong> bëhet portokalli për kontrast */
     text-shadow: 1px 1px 5px rgba(255, 122, 14, 0.5);
     /* Hijë portokalli rreth tekstit për efekt ndriçimi */
@@ -178,3 +171,8 @@
   border-radius: 20px;
   padding: 6px 12px;
 }
+
+/* .navigation-bar .logo-name strong {
+  font-family: "AboveTheBeyond" !important;
+  font-weight: normal !important;
+} */

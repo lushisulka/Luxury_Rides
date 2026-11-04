@@ -1,6 +1,8 @@
-/* Simple Login Modal Styles */
+
+/* Login Modal */
 
 .login-modal .modal-dialog {
+    width: calc(100% - 2rem);
     max-width: 390px;
     margin: 1rem auto;
 }
@@ -14,6 +16,7 @@
 }
 
 /* Header */
+
 .login-modal .modal-header {
     position: relative;
     justify-content: center;
@@ -23,7 +26,7 @@
 }
 
 .login-modal .modal-title {
-    color: black;
+    color: #000000;
     font-size: 1.2rem;
     font-weight: 600;
     text-align: center;
@@ -43,6 +46,7 @@
 }
 
 /* Modal Body */
+
 .login-modal .modal-body {
     padding: 1.5rem;
 }
@@ -54,7 +58,8 @@
     font-weight: 500;
 }
 
-/* Email and Password Inputs */
+/* Inputs */
+
 .login-modal .login-input {
     min-height: 43px;
     padding: 0.7rem 0.9rem;
@@ -72,15 +77,11 @@
     color: #9ca3af;
 }
 
-/* Hover - Orange Border */
-.login-modal .login-input {
+.login-modal .login-input:hover {
     border-color: #f97316 !important;
-    box-shadow: none !important;
 }
 
-/* Focus - Orange Border and Glow */
-.login-modal .login-input,
-.login-modal .login-input {
+.login-modal .login-input:focus {
     border-color: #f97316 !important;
     background-color: #ffffff;
     color: #1e293b;
@@ -88,7 +89,21 @@
     box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15) !important;
 }
 
+/* Chrome Autofill */
+
+.login-modal .login-input:-webkit-autofill,
+.login-modal .login-input:-webkit-autofill:hover,
+.login-modal .login-input:-webkit-autofill:focus,
+.login-modal .login-input:-webkit-autofill:active {
+    -webkit-text-fill-color: #1e293b !important;
+    caret-color: #1e293b;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    border: 1px solid #f97316 !important;
+}
+
 /* Footer */
+
 .login-modal .modal-footer {
     justify-content: center;
     padding: 0.75rem 0 0;
@@ -96,6 +111,7 @@
 }
 
 /* Login Button */
+
 .login-modal .login-button {
     display: block;
     width: auto;
@@ -113,7 +129,7 @@
         transform 0.2s ease;
 }
 
-.login-modal .login-button {
+.login-modal .login-button:hover {
     border-color: #c2410c;
     background: linear-gradient(135deg, #ea580c, #c2410c);
     color: #ffffff;
@@ -121,59 +137,64 @@
     transform: translateY(-1px);
 }
 
-.login-modal .login-button {
+.login-modal .login-button:active {
     transform: translateY(0);
     box-shadow: 0 3px 8px rgba(249, 115, 22, 0.18);
 }
 
-.login-modal .login-button {
+.login-modal .login-button:focus-visible {
     outline: 3px solid rgba(249, 115, 22, 0.3);
     outline-offset: 3px;
 }
 
 /* Mobile Responsive */
+
 @media (max-width: 576px) {
     .login-modal .modal-dialog {
-        margin: 0.75rem;
+        width: calc(100% - 2rem);
+        max-width: 390px;
+        margin: 0.75rem auto;
+    }
+
+    .login-modal .modal-content {
+        border-radius: 14px;
     }
 
     .login-modal .modal-header {
-        padding: 1.2rem;
+        padding: 1rem 1.25rem;
     }
 
     .login-modal .modal-title {
-        font-size: 1.3rem;
+        font-size: 1.15rem;
     }
 
     .login-modal .modal-body {
         padding: 1.25rem;
     }
 
+    .login-modal .form-label {
+        font-size: 0.9rem;
+    }
+
+    .login-modal .login-input {
+        min-height: 44px;
+        font-size: 16px;
+    }
+
+    .login-modal .login-button {
+        width: 100%;
+        min-height: 44px;
+    }
 }
 
-/* Remove blue autofill styling from Chrome */
+/* Small Mobile */
 
-.login-modal .login-input:-webkit-autofill,
-.login-modal .login-input:-webkit-autofill,
-.login-modal .login-input:-webkit-autofill,
-.login-modal .login-input:-webkit-autofill {
--webkit-text-fill-color: #1e293b !important;
-caret-color: #1e293b;
--webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
-box-shadow: 0 0 0 1000px #ffffff inset !important;
-border: 1px solid #f97316 !important;
-transition: background-color 9999s ease-out;
-}
+@media (max-width: 360px) {
+    .login-modal .modal-dialog {
+        width: calc(100% - 1.5rem);
+    }
 
-/* Keep orange border on hover and focus */
-.login-modal .login-input,
-.login-modal .login-input,
-.login-modal .login-input {
-border-color: #f97316 !important;
-outline: none !important;
-}
-
-.login-modal .login-input,
-.login-modal .login-input {
-box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15) !important;
+    .login-modal .modal-body {
+        padding: 1rem;
+    }
 }
